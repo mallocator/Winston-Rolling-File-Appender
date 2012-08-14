@@ -32,3 +32,8 @@ winston.loggers.add('myLogger', {
 	}
 });
 ```
+
+# Install
+for [node.js](http://nodejs.org/) and [npm](https://npmjs.org):
+
+	npm install https://github.com/mallocator/Winston-Rolling-File-Appender/tarball/master
