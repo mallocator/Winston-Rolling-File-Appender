@@ -6,12 +6,12 @@ This transport has been modified from the original transport to create a log fil
 
 If configured with my.log as filename, the generated files will be for example:
 
-my.2012-08-01.log
-my.2012-08-02.log
-my.2012-08-03.log
-...
-my.2012-08-10.log
-my.log ( -> symbolic link to latest log file)
+	my.2012-08-01.log
+	my.2012-08-02.log
+	my.2012-08-03.log
+	...
+	my.2012-08-10.log
+	my.log ( -> symbolic link to latest log file)
 
 The transport has been used and tested on linux machines. No idea if this works on windows.
 
