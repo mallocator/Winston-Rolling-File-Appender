@@ -1,0 +1,18 @@
+{
+	"name": "rollingFileTransport",
+	"description": "A rolling file transport for the winston logger that supports daily rolling log files",
+	"version": "1.0.0",
+	"author": "Ravi Gairola <mallox@pyxzl.net>",
+	"repository": {
+		"type": "git",
+		"url": "http://github.com/mallocator/Winston-Rolling-File-Appender"
+	},
+	"main": "./rollingFile",
+	"keywords": ["logger", "rolling file", "winston", "transport"],
+	"dependencies": {
+		"winston": "*"
+	},
+	"engine": {
+		"node": ">=0.6"
+	}
+}
