@@ -50,16 +50,18 @@ var RollingFile = winston.transports.RollingFile = exports.RollingFile = functio
 	} else {
 		throw new Error('Cannot log to file without filename or stream.');
 	}
+	if (options.checkPermissions == null)
+	 	options.checkPermissions = true;
 	
-	function canWrite(owner, inGroup, mode) {
-		return owner && mode & 00200 || inGroup && mode & 00020 || mode & 00002;
+	if (options.checkPermissions) {
+		function canWrite(owner, inGroup, mode) {
+			return owner && mode & 00200 || inGroup && mode & 00020 || mode & 00002;
+		}
+		var stat = fs.statSync(this.dirname);
+		if (!canWrite(process.getuid() === stat.uid, process.getgid() === stat.gid, stat.mode)) { 
+			throw new Error('Cannot create logs in directory "' + this.dirname + '"'); 
+		}
 	}
-	
-	var stat = fs.statSync(this.dirname);
-	if (!canWrite(process.uid === stat.uid, process.gid === stat.gid, stat.mode)) { 
-		throw new Error('Cannot create logs in directory "' + this.dirname + '"'); 
-	}
-	
 	this.json = options.json !== false;
 	this.colorize = options.colorize || false;
 	this.maxFiles = options.maxFiles ? options.maxFiles : 10;
