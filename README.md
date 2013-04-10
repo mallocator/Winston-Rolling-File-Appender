@@ -20,7 +20,7 @@ The transport has been used and tested on linux machines. No idea if this works 
 
 ```javascript
 var winston = require('winston');
-require('./rollingFile.js');
+require('rollingFileTransport');
 
 winston.loggers.add('myLogger', {
 	rollingFile : {
@@ -34,6 +34,16 @@ winston.loggers.add('myLogger', {
 ```
 
 # Install
-for [node.js](http://nodejs.org/) and [npm](https://npmjs.org):
+for [node.js](http://nodejs.org/) and [npm](https://npmjs.org), use the package.json to install your dependecies (running "npm install"):
+
+	{
+		...
+		"dependencies": {
+			"winstonRollingTransport" : "git://github.com/mallocator/Winston-Rolling-File-Appender.git#master"
+		}
+		...
+	}
+
+or install it manually
 
 	npm install git://github.com/mallocator/Winston-Rolling-File-Appender.git
