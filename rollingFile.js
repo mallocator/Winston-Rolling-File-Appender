@@ -1,5 +1,4 @@
 var winston = require('winston');
-var events = require('events');
 var fs = require('fs');
 var path = require('path');
 var util = require('util');
@@ -50,8 +49,8 @@ var RollingFile = winston.transports.RollingFile = exports.RollingFile = functio
 	} else {
 		throw new Error('Cannot log to file without filename or stream.');
 	}
-	if (options.checkPermissions == null)
-	 	options.checkPermissions = true;
+	if (options.checkPermissions === null)
+        options.checkPermissions = true;
 	
 	if (options.checkPermissions) {
 		function canWrite(owner, inGroup, mode) {
@@ -70,7 +69,7 @@ var RollingFile = winston.transports.RollingFile = exports.RollingFile = functio
 	
 	this._ext = path.extname(this._filename);
 	this._basename = path.basename(this._filename, this._ext);
-	this._oldFilesRegEx = new RegExp(this._basename + '\.[0-9\-]*\.' + this._ext.substr(1));
+	this._oldFilesRegEx = new RegExp(this._basename + '\\.[0-9\\-]*\\.' + this._ext.substr(1));
 };
 
 // Inherit from `winston.Transport`.
@@ -183,7 +182,8 @@ RollingFile.prototype._createStream = function(dateString) {
 };
 
 RollingFile.prototype._createLink = function(filename) {
-	var linkName = path.join(this.dirname, this._filename);
+	var linkName = path.join(this.dirname, this._basename + this._ext);
+    filename = path.basename(filename);
 	function link() {
 		fs.symlink(filename, linkName);
 	}
@@ -193,6 +193,7 @@ RollingFile.prototype._createLink = function(filename) {
 			fs.readlink(linkName, function(err, dst) {
 				if (dst != filename) {
 					fs.unlink(linkName, link);
+                console.log('unlinked: ' +dst + " " + filename)
 				}
 			});
 		} else {
@@ -227,9 +228,10 @@ RollingFile.prototype._lazyDrain = function() {
 	
 	if (!this._draining && this.stream) {
 		this._draining = true;
-		
+        
+        var that = this;		
 		this.stream.once('drain', function() {
-			this._draining = false;
+			that._draining = false;
 			self.emit('logged');
 		});
 	}
