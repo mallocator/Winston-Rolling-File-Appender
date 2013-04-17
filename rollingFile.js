@@ -212,6 +212,14 @@ RollingFile.prototype._cleanOldFiles = function() {
 	}
 	var self = this;
 	fs.readdir(this.dirname, function(err, files) {
+		if (err) {
+			console.log('There has been an error while trying to clean old log files:', err);
+			return;
+		}
+		if (!files) {
+			console.log('No (log) files found, probably permissions problem on directory');
+			return;
+		}
 		files.forEach(function(file) {
 			if (self._oldFilesRegEx.test(file) && !whitelist[file]) {
 				fs.unlink(path.join(this.dirname, file));
