@@ -222,7 +222,7 @@ RollingFile.prototype._cleanOldFiles = function() {
 		}
 		files.forEach(function(file) {
 			if (self._oldFilesRegEx.test(file) && !whitelist[file]) {
-				fs.unlink(path.join(this.dirname, file));
+				fs.unlink(path.join(self.dirname, file));
 			}
 		});
 	});
