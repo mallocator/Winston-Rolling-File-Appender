@@ -1,5 +1,5 @@
 {
-	"name": "rollingFileTransport",
+	"name": "rolling-file-transport",
 	"description": "A rolling file transport for the winston logger that supports daily rolling log files",
 	"version": "1.0.0",
 	"author": "Ravi Gairola <mallox@pyxzl.net>",

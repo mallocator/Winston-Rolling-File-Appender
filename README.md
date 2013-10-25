@@ -20,7 +20,7 @@ The transport has been used and tested on linux machines. No idea if this works 
 
 ```javascript
 var winston = require('winston');
-require('rollingFileTransport');
+require('rolling-file-transport');
 
 winston.loggers.add('myLogger', {
 	rollingFile : {
