@@ -167,7 +167,7 @@ RollingFile.prototype._createStream = function(dateString) {
 	
 	var self = this;
 	var filename = path.join(this.dirname, this._basename + '.' + dateString + this._ext);
-	path.exists(filename, function(exists) {
+	fs.exists(filename, function(exists) {
 		self.stream = fs.createWriteStream(filename, {
 			'flags' : exists ? 'a' : 'w'
 		});
@@ -188,7 +188,7 @@ RollingFile.prototype._createLink = function(filename) {
 		fs.symlink(filename, linkName);
 	}
 	
-	path.exists(linkName, function(exists) {
+	fs.exists(linkName, function(exists) {
 		if (exists) {
 			fs.readlink(linkName, function(err, dst) {
 				if (dst != filename) {
