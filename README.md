@@ -1,5 +1,9 @@
 Winston-Rolling-File-Appender
 =============================
+[![npm version](https://badge.fury.io/js/Winston-Rolling-File-Appender.svg)](http://badge.fury.io/js/Winston-Rolling-File-Appender)
+[![Build Status](https://travis-ci.org/mallocator/Winston-Rolling-File-Appender.svg?branch=master)](https://travis-ci.org/mallocator/Winston-Rolling-File-Appender)
+[![Coverage Status](https://coveralls.io/repos/github/mallocator/Winston-Rolling-File-Appender/badge.svg?branch=master)](https://coveralls.io/github/mallocator/Winston-Rolling-File-Appender?branch=master)
+[![Dependency Status](https://david-dm.org/mallocator/Winston-Rolling-File-Appender.svg)](https://david-dm.org/mallocator/Winston-Rolling-File-Appender) 
 
 A rolling file transport for the logging library winston for node.js.
 This transport has been modified from the original transport to create a log file for each day.
@@ -34,16 +38,5 @@ winston.loggers.add('myLogger', {
 ```
 
 # Install
-for [node.js](http://nodejs.org/) and [npm](https://npmjs.org), use the package.json to install your dependecies (running "npm install"):
 
-	{
-		...
-		"dependencies": {
-			"winstonRollingTransport" : "git://github.com/mallocator/Winston-Rolling-File-Appender.git#master"
-		}
-		...
-	}
-
-or install it manually
-
-	npm install git://github.com/mallocator/Winston-Rolling-File-Appender.git
+```npm install --save rolling-file-transport```

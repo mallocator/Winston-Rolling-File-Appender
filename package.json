@@ -1,18 +1,45 @@
 {
 	"name": "rolling-file-transport",
 	"description": "A rolling file transport for the winston logger that supports daily rolling log files",
-	"version": "1.0.0",
-	"author": "Ravi Gairola <mallox@pyxzl.net>",
+	"version": "1.1.0",
+	"homepage": "http://github.com/mallocator/rolling-file-transport",
+	"license": "Apache-2.0",
+	"main": "rollingFile.js",
+	"keywords": [
+		"logger",
+		"rolling file",
+		"winston",
+		"transport"
+	],
+	"author": {
+		"name": "Ravi Gairola",
+		"email": "mallox@pyxzl.net",
+		"url": "https://github.com/mallocator"
+	},
 	"repository": {
 		"type": "git",
 		"url": "http://github.com/mallocator/Winston-Rolling-File-Appender"
 	},
-	"main": "./rollingFile",
-	"keywords": ["logger", "rolling file", "winston", "transport"],
+	"bugs": {
+		"url": "http://github.com/mallocator/zero-service/issues",
+		"email": "mallox@pyxzl.net"
+	},
+	"engine": {
+		"node": ">=6.0"
+	},
+	"scripts": {
+		"test": "istanbul cover _mocha -- --recursive",
+		"test-travis": "istanbul cover _mocha --report lcovonly -- -R spec --recursive"
+	},
 	"dependencies": {
 		"winston": "*"
 	},
-	"engine": {
-		"node": ">=0.6"
+	"devDependencies": {
+		"chai": "^3.5.0",
+		"coveralls": "^2.11.9",
+		"istanbul": "^0.4.3",
+		"mocha": "^2.4.5",
+		"mocha-lcov-reporter": "^1.2.0",
+		"sinon": "^1.17.3"
 	}
 }
