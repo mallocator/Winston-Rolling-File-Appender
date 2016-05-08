@@ -1,6 +1,6 @@
 Winston-Rolling-File-Appender
 =============================
-[![npm version](https://badge.fury.io/js/rolling-file-appender.svg)](http://badge.fury.io/js/rolling-file-appender)
+[![npm version](https://badge.fury.io/js/rolling-file-appender.svg)](http://badge.fury.io/js/rolling-file-transport)
 [![Build Status](https://travis-ci.org/mallocator/Winston-Rolling-File-Appender.svg?branch=master)](https://travis-ci.org/mallocator/Winston-Rolling-File-Appender)
 [![Coverage Status](https://coveralls.io/repos/github/mallocator/Winston-Rolling-File-Appender/badge.svg?branch=master)](https://coveralls.io/github/mallocator/Winston-Rolling-File-Appender?branch=master)
 [![Dependency Status](https://david-dm.org/mallocator/Winston-Rolling-File-Appender.svg)](https://david-dm.org/mallocator/Winston-Rolling-File-Appender) 
