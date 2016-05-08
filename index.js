@@ -56,11 +56,11 @@ class RollingFile extends Transport {
      * @param {string} level Level at which to log the message.
      * @param {string} message Message to log
      * @param {Object} [meta] Additional metadata to attach
-     * @param {function} callback Continuation to respond to when complete.
+     * @param {function} [callback] Continuation to respond to when complete.
      */
     log(level, message, meta, callback) {
         if (this.silent) {
-            return callback(null, true);
+            return callback && callback(null, true);
         }
 
         var output = this._format({
@@ -74,34 +74,33 @@ class RollingFile extends Transport {
 
         if (!this._open()) {
             this._buffer.push(output);
-            return callback(null, true);
+            return callback && callback(null, true);
         } else {
             self.stream.write(output);
             self._lazyDrain();
         }
 
-        callback(null, true);
+        callback && callback(null, true);
     }
 
     _format(options) {
-        var timestamp = typeof options.timestamp === 'function' ? options.timestamp() : options.timestamp ? new Date().toString().substr(4, 20) : null;
+        var timestamp = null;
+        if (options.timestamp) {
+            timestamp = typeof options.timestamp === 'function' ? options.timestamp() : new Date().toISOString();
+        }
         var output;
 
         if (options.json) {
-            output = {};
-            output.level = options.level;
-            output.message = options.message;
+            output = {
+                level: options.level,
+                message: options.message instanceof Buffer ? options.message.toString('base64') : options.message
+            };
 
             if (timestamp) {
                 output.timestamp = timestamp;
             }
 
-            return JSON.stringify(output, function (key, value) {
-                if (value instanceof Buffer) {
-                    return value.toString('base64');
-                }
-                return value;
-            });
+            return JSON.stringify(output);
         }
 
         output = timestamp ? timestamp + ' - ' : '';
@@ -128,24 +127,9 @@ class RollingFile extends Transport {
     }
 
     /**
-     * Closes the stream associated with this instance.
-     */
-    close() {
-        if (this.stream) {
-            this.stream.end();
-            this.stream.destroySoon();
-
-            this.stream.once('drain', () => {
-                this.emit('flush');
-                this.emit('closed');
-            });
-        }
-    }
-
-    /**
      * Flushes any buffered messages to the current `stream` used by this instance.
      */
-    flush() {
+    _flush() {
         // Iterate over the `_buffer` of enqueued messaged and then write them to the newly created stream.
         this._buffer.forEach(str => {
             process.nextTick(() => {
@@ -169,7 +153,7 @@ class RollingFile extends Transport {
      */
     _createStream(dateString) {
         if (this.stream) {
-            this.flush();
+            this._flush();
         }
 
         var filename = path.join(this.dirname, this._basename + '.' + dateString + this._ext);
@@ -181,7 +165,7 @@ class RollingFile extends Transport {
                 this.opening = false;
                 this.emit('open', filename);
             });
-            this.flush();
+            this._flush();
         });
         this._createLink(filename);
         this._cleanOldFiles();
