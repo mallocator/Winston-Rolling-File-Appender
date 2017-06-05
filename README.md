@@ -1,9 +1,9 @@
 Winston-Rolling-File-Appender
 =============================
-[![npm version](https://badge.fury.io/js/rolling-file-appender.svg)](http://badge.fury.io/js/rolling-file-transport)
+[![npm version](https://badge.fury.io/js/rolling-file-transport.svg)](https://badge.fury.io/js/rolling-file-transport)
 [![Build Status](https://travis-ci.org/mallocator/Winston-Rolling-File-Appender.svg?branch=master)](https://travis-ci.org/mallocator/Winston-Rolling-File-Appender)
 [![Coverage Status](https://coveralls.io/repos/github/mallocator/Winston-Rolling-File-Appender/badge.svg?branch=master)](https://coveralls.io/github/mallocator/Winston-Rolling-File-Appender?branch=master)
-[![Dependency Status](https://david-dm.org/mallocator/Winston-Rolling-File-Appender.svg)](https://david-dm.org/mallocator/Winston-Rolling-File-Appender) 
+[![Dependency Status](https://david-dm.org/mallocator/Winston-Rolling-File-Appender.svg)](https://david-dm.org/mallocator/Winston-Rolling-File-Appender)
 
 A rolling file transport for the logging library winston for node.js.
 This transport has been modified from the original transport to create a log file for each day.
@@ -28,7 +28,7 @@ require('rolling-file-transport');
 
 winston.loggers.add('myLogger', {
 	rollingFile : {
-		filename : '/path/to/my/filename.log',	// files will use filename.<date>.log for all files 
+		filename : '/path/to/my/filename.log',	// files will use filename.<date>.log for all files
 		level : 'info',							// Set your winston log level, same as original file transport
 		timestamp : true,						// Set timestmap format/enabled, Same ass original file transport
 		maxFiles : 10,							// How many days to keep as back log

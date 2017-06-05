@@ -28,8 +28,9 @@ class RollingFile extends winston.Transport {
         } else {
             throw new Error('Cannot log to file without filename or stream.');
         }
-        if (options.checkPermissions === null)
+        if (options.checkPermissions === null) {
             options.checkPermissions = true;
+        }
 
         if (options.checkPermissions) {
             let stat = fs.statSync(this.dirname);
@@ -81,11 +82,11 @@ class RollingFile extends winston.Transport {
     }
 
     _format(options) {
-        var timestamp = null;
+        let timestamp = null;
         if (options.timestamp) {
             timestamp = typeof options.timestamp === 'function' ? options.timestamp() : new Date().toISOString();
         }
-        var output;
+        let output;
 
         if (options.json) {
             output = {
@@ -114,7 +115,7 @@ class RollingFile extends winston.Transport {
         if (this.opening) {
             return false;
         }
-        var todayString = new Date().toISOString().substr(0, 10);
+        let todayString = new Date().toISOString().substr(0, 10);
         if (!this.streamDate || this.StreamDate != todayString) {
             this.opening = true;
             this._createStream(todayString);
@@ -153,7 +154,7 @@ class RollingFile extends winston.Transport {
             this._flush();
         }
 
-        var filename = path.join(this.dirname, this._basename + '.' + dateString + this._ext);
+        let filename = path.join(this.dirname, this._basename + '.' + dateString + this._ext);
         fs.exists(filename, exists => {
             this.stream = fs.createWriteStream(filename, {
                 'flags': exists ? 'a' : 'w'
@@ -169,7 +170,7 @@ class RollingFile extends winston.Transport {
     }
 
     _createLink(filename) {
-        var linkName = path.join(this.dirname, this._basename + this._ext);
+        let linkName = path.join(this.dirname, this._basename + this._ext);
         filename = path.basename(filename);
         function link() {
             fs.symlink(filename, linkName, err => {
@@ -182,7 +183,6 @@ class RollingFile extends winston.Transport {
                 fs.readlink(linkName, function (err, dst) {
                     if (dst != filename) {
                         fs.unlink(linkName, link);
-                        console.log('unlinked: ' + dst + " " + filename)
                     }
                 });
             } else {
@@ -192,10 +192,10 @@ class RollingFile extends winston.Transport {
     }
 
     _cleanOldFiles() {
-        var whitelist = {};
-        var date = new Date();
-        for (var i = 0; i < this.maxFiles; i++) {
-            var filename = this._basename + '.' + date.toISOString().substr(0, 10) + this._ext;
+        let whitelist = {};
+        let date = new Date();
+        for (let i = 0; i < this.maxFiles; i++) {
+            let filename = this._basename + '.' + date.toISOString().substr(0, 10) + this._ext;
             whitelist[filename] = true;
             date.setDate(date.getDate() - 1);
         }
