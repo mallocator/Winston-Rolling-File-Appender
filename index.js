@@ -173,7 +173,7 @@ class RollingFile extends winston.Transport {
         filename = path.basename(filename);
         function link() {
             fs.symlink(filename, linkName, err => {
-                console.log('unable to create symlink', err);
+                err && console.log('unable to create symlink', err);
             });
         }
 
