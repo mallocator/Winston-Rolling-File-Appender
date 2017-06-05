@@ -28,18 +28,17 @@
 		"node": ">=6.0"
 	},
 	"scripts": {
-		"test": "istanbul cover _mocha -- --recursive",
-		"test-travis": "istanbul cover _mocha --report lcovonly -- -R spec --recursive"
+		"test": "nyc --reporter=text --reporter=html mocha --recursive",
+		"coverage": "nyc report --reporter=text-lcov | coveralls"
 	},
 	"dependencies": {
 		"winston": "*"
 	},
 	"devDependencies": {
-		"chai": "^3.5.0",
+		"chai": "^4.0.2",
 		"coveralls": "^2.11.9",
-		"istanbul": "^0.4.3",
-		"mocha": "^2.4.5",
-		"mocha-lcov-reporter": "^1.2.0",
-		"sinon": "^1.17.3"
+		"mocha": "^3.4.2",
+		"nyc": "^11.0.2",
+		"sinon": "^2.3.2"
 	}
 }

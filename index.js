@@ -1,13 +1,10 @@
-'use strict';
-
-var winston = require('winston');
-var fs = require('fs');
-var path = require('path');
-var util = require('util');
-var Transport = winston.Transport;
+const fs = require('fs');
+const path = require('path');
+const util = require('util');
+const winston = require('winston');
 
 
-class RollingFile extends Transport {
+class RollingFile extends winston.Transport {
     constructor(options) {
         super(options);
 
@@ -35,7 +32,7 @@ class RollingFile extends Transport {
             options.checkPermissions = true;
 
         if (options.checkPermissions) {
-            var stat = fs.statSync(this.dirname);
+            let stat = fs.statSync(this.dirname);
             if (!canWrite(process.getuid() === stat.uid, process.getgid() === stat.gid, stat.mode)) {
                 throw new Error('Cannot create logs in directory "' + this.dirname + '"');
             }
@@ -63,14 +60,14 @@ class RollingFile extends Transport {
             return callback && callback(null, true);
         }
 
-        var output = this._format({
-                level,
-                message,
-                meta,
-                json: this.json,
-                colorize: this.colorize,
-                timestamp: this.timestamp
-            }) + '\n';
+        let output = this._format({
+            level,
+            message,
+            meta,
+            json: this.json,
+            colorize: this.colorize,
+            timestamp: this.timestamp
+        }) + '\n';
 
         if (!this._open()) {
             this._buffer.push(output);
