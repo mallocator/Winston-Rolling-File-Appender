@@ -5,10 +5,10 @@ Winston-Rolling-File-Appender
 [![Coverage Status](https://coveralls.io/repos/github/mallocator/Winston-Rolling-File-Appender/badge.svg?branch=master)](https://coveralls.io/github/mallocator/Winston-Rolling-File-Appender?branch=master)
 [![Dependency Status](https://david-dm.org/mallocator/Winston-Rolling-File-Appender.svg)](https://david-dm.org/mallocator/Winston-Rolling-File-Appender)
 
-A rolling file transport for the logging library winston for node.js.
+A rolling file transport for the logging library Winston for node.js.
 This transport has been modified from the original transport to create a log file for each day.
 
-If configured with my.log as filename, the generated files will be for example:
+If configured with my.log as the filename, the generated files will be, for example:
 
 	my.2012-08-01.log
 	my.2012-08-02.log
@@ -17,7 +17,11 @@ If configured with my.log as filename, the generated files will be for example:
 	my.2012-08-10.log
 	my.log ( -> symbolic link to latest log file)
 
-The transport has been used and tested on linux machines. No idea if this works on windows.
+The transport has been used and tested on Linux machines. No idea if this works on Windows.
+
+# Deprecation Warning
+
+This project is no longer actively maintained. If you're looking for a rotating log transport, you can find alternatives on npmjs.org such as [winston-daily-rotate-file](https://www.npmjs.com/package/winston-daily-rotate-file)
 
 
 # Usage
